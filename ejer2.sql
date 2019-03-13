@@ -1,3 +1,7 @@
+/*2. Deberá crear las tablas del esquema (con excepción de las marcadas en gris). Deberá considerar las
+claves primarias, constraints de no nulidad y claves foráneas. En este paso asigne por defecto el
+tablespace creado, pero no hace falta que determine el tamaño de las tablas.*/
+
 --create table soc_socio
 CREATE TABLE soc_socio (
 	id_socio number(12) not null,
@@ -15,8 +19,7 @@ CREATE TABLE soc_socio (
 	estado varchar2(1) not null,
 	fecha_fallecimiento date,
 	fecha_baja date,
-	CONSTRAINT pk_id_socio PRIMARY KEY (id_socio),
-	CONSTRAINT SOCIO_ESTADO CHECK (ESTADO IN 'A', 'I','P', 'E','F')
+	CONSTRAINT pk_idsocio PRIMARY KEY (id_socio)
 );
 
 --create table cre_solicitud_prestamos
