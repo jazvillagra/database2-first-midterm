@@ -33,8 +33,9 @@ COMMIT;
 -- 7) Actualice el SALDO_DISPONIBLE de la tabla AHO_CUENTA_AHORRO de la siguiente
 -- manera: SALDO_DISPONIBLE = ∑ importe de los MOVIMIENTOS cuyo tipo es Crédito – 
 -- (∑importe de los MOVIMIENTOS cuyo tipo es Débito + SALDO_BLOQUEADO).
+
 CREATE OR REPLACE VIEW importe_credito_cuentas AS
-SELECT CA.id_cuenta id_cuenta, sum(importe) importe
+SELECT CA.id_cuenta id_cuenta, sum(nvl(importe,0)) importe
 FROM
 	AHO_MOVIMIENTOS_CUENTA MC
 	INNER JOIN AHO_TIPO_MOVIMIENTO TM ON MC.ID_TIPO = TM.ID_TIPO
@@ -42,17 +43,31 @@ FROM
 WHERE DEBITO_CREDITO = 'C'
 GROUP BY CA.id_cuenta;
 
+COMMIT;
+
 CREATE OR REPLACE VIEW importe_debito_cuentas AS
-SELECT CA.id_cuenta id_cuenta, sum(importe) importe
+SELECT CA.id_cuenta id_cuenta, sum(nvl(importe+saldo_bloqueado, 0)) importe
 FROM
 	AHO_MOVIMIENTOS_CUENTA MC
 	INNER JOIN AHO_TIPO_MOVIMIENTO TM ON MC.ID_TIPO = TM.ID_TIPO
 	INNER JOIN AHO_CUENTA_AHORRO CA ON MC.id_cuenta = CA.id_cuenta
 WHERE DEBITO_CREDITO = 'D'
 GROUP BY CA.id_cuenta;
-/*
-UPDATE AHO_CUENTA_AHORRO SET SALDO_DISPONIBLE = MOV.importe
-FROM AHO_CUENTA_AHORRO CA 
-INNER JOIN importe_debito_cuentas DEB 
-ON CA.id_cuenta = MOV.id_cuenta;
-*/
+
+COMMIT;
+
+CREATE OR REPLACE VIEW importe_total AS
+SELECT sum(nvl(imc.importe-idc.importe,0)) importe, imc.id_cuenta id
+FROM
+	importe_credito_cuentas imc
+	JOIN importe_debito_cuentas idc ON idc.id_cuenta = imc.id_cuenta
+GROUP BY imc.id_cuenta;
+
+COMMIT;
+/* Descomentar cuando se sepa como hacer el merge
+MERGE INTO AHO_CUENTA_AHORRO CA
+	USING importe_total IT
+		ON CA.id_cuenta = IT.id_cuenta
+WHEN MATCHED THEN
+	UPDATE
+		SET SALDO_DISPONIBLE = IT.importe;*/
