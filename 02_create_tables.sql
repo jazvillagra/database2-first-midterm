@@ -48,8 +48,6 @@ CREATE TABLE cre_solicitud_prestamos (
 	CONSTRAINT SOL_PRES_SITUACION CHECK(situacion IN ('I','A','R','X'))
 );
 
-<<<<<<< HEAD
-=======
 --create table cre_modalidad_prestamo
 CREATE TABLE cre_modalidad_prestamo (
 	cod_tipo number(3) not null,
@@ -61,12 +59,6 @@ CREATE TABLE cre_modalidad_prestamo (
 	CONSTRAINT pk_id_modalidad PRIMARY KEY (cod_tipo)
 );
 
-/*
---alter table for fecha_presentacion = sysdate as default
-ALTER TABLE cre_solicitud_prestamos
-MODIFY fecha_presentacion DEFAULT sysdate;
-*/
->>>>>>> 1fc66887aa3b7062dd41f16f7a1d9123582f0c9f
 --create table cre_prestamos
 CREATE TABLE cre_prestamos (
 	nro_prestamo number(12) not null,

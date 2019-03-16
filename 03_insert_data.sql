@@ -64,10 +64,9 @@ FROM
 GROUP BY imc.id_cuenta;
 
 COMMIT;
-/* Descomentar cuando se sepa como hacer el merge
+/*
 MERGE INTO AHO_CUENTA_AHORRO CA
-	USING importe_total IT
-		ON CA.id_cuenta = IT.id_cuenta
+	USING importe_total IT 
+	on (CA.id_cuenta = IT.id_cuenta)
 WHEN MATCHED THEN
-	UPDATE
-		SET SALDO_DISPONIBLE = IT.importe;*/
+	UPDATE SET CA.SALDO_DISPONIBLE = IT.importe;*/
