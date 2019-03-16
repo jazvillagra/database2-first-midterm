@@ -1,3 +1,7 @@
+/*2. Deberá crear las tablas del esquema (con excepción de las marcadas en gris). Deberá considerar las
+claves primarias, constraints de no nulidad y claves foráneas. En este paso asigne por defecto el
+tablespace creado, pero no hace falta que determine el tamaño de las tablas.*/
+
 --create table soc_socio
 CREATE TABLE soc_socio (
 	id_socio number(12) not null,
@@ -15,24 +19,13 @@ CREATE TABLE soc_socio (
 	estado varchar2(1) not null,
 	fecha_fallecimiento date,
 	fecha_baja date,
-	CONSTRAINT pk_id_socio PRIMARY KEY (id_socio),
-	CONSTRAINT SOCIO_ESTADO CHECK (ESTADO IN ('A', 'I','P', 'E','F'))
+	CONSTRAINT pk_idsocio PRIMARY KEY (id_socio)
 );
---create table cre_modalidad_prestamo
-CREATE TABLE cre_modalidad_prestamo (
-	cod_tipo number(3) not null,
-	descripcion_mod varchar2(60) not null,
-	tasa_interes_anual number(3,1) not null,
-	relacion_aportes number(2) not null,
-	plazo_maximo number(3) not null,
-	tipo_garantia varchar2(2) not null,
-	CONSTRAINT pk_id_modalidad PRIMARY KEY (cod_tipo),
-	CONSTRAINT tipo_garantia_cre_modalidad_prestamo CHECK (tipo_garantia IN ('NI', 'CA', 'HI', 'CD'))
-);
+
 --create table cre_solicitud_prestamos
 CREATE TABLE cre_solicitud_prestamos (
 	id_sol_cred number(12) not null,
-	fecha_presentacion date DEFAULT sysdate,
+	fecha_presentacion date not null DEFAULT sysdate,
 	situacion varchar2(1) not null,
 	monto_solicitado number(12) not null,
 	monto_concedido number(12) not null,
@@ -42,14 +35,12 @@ CREATE TABLE cre_solicitud_prestamos (
 	socio_codeudor number(12) not null,
 	cod_tipo number(3) not null,
 	CONSTRAINT pk_id_sol_cred PRIMARY KEY (id_sol_cred),
-	CONSTRAINT fk_cod_mod FOREIGN KEY (cod_tipo) REFERENCES cre_modalidad_prestamo(cod_tipo),
+	CONSTRAINT fk_cod_mod FOREIGN KEY (cod_tipo) REFERENCES cre_solicitud_prestamos(cod_tipo),
 	CONSTRAINT fk_id_socio_deudor FOREIGN KEY (socio_deudor) REFERENCES soc_socio (id_socio),
-	CONSTRAINT fk_id_socio_codeudor FOREIGN KEY (socio_codeudor) REFERENCES soc_socio(id_socio),
-	CONSTRAINT SOL_PRES_SITUACION CHECK(situacion IN ('I','A','R','X'))
+	CONSTRAINT fk_id_socio_codeudor FOREIGN KEY (socio_codeudor) REFERENCES soc_socio(id_socio)
+	CONSTRAINT SOL_PRES_SITUACION_CHECK(situacion IN ('I','A','R','X'))
 );
 
-<<<<<<< HEAD
-=======
 --create table cre_modalidad_prestamo
 CREATE TABLE cre_modalidad_prestamo (
 	cod_tipo number(3) not null,
@@ -66,7 +57,6 @@ CREATE TABLE cre_modalidad_prestamo (
 ALTER TABLE cre_solicitud_prestamos
 MODIFY fecha_presentacion DEFAULT sysdate;
 */
->>>>>>> 1fc66887aa3b7062dd41f16f7a1d9123582f0c9f
 --create table cre_prestamos
 CREATE TABLE cre_prestamos (
 	nro_prestamo number(12) not null,
@@ -77,7 +67,7 @@ CREATE TABLE cre_prestamos (
 	estado varchar2(1) not null,
 	id_sol_cred number(12) not null,
 	CONSTRAINT pk_id_prestamo PRIMARY KEY (nro_prestamo),
-	CONSTRAINT fk_id_sol_cred FOREIGN KEY (id_sol_cred) REFERENCES cre_solicitud_prestamos(id_sol_cred),
+	CONSTRAINT fk_id_sol_cred FOREIGN KEY (id_sol_cred) REFERENCES cre_solicitud_prestamos(id_sol_cred);
 	CONSTRAINT estado_cre_prestamo_check CHECK (estado in ('I', 'A'))
 );
 
@@ -100,12 +90,12 @@ CREATE TABLE cre_cuotas (
 CREATE TABLE aho_cuenta_ahorro (
 	id_cuenta number(8) not null,
 	id_socio number(12) not null,
-	estado varchar2(1) DEFAULT 'A',
+	estado varchar2(1) not null DEFAULT 'A',
 	tasa_interes number(3) not null,
 	fecha_apertura date not null,
 	fecha_cancel date,
 	saldo_bloqueado number(12) not null,
-	saldo_disponible number(12) not null,
+	saldo_disponible number(12) not null
 	CONSTRAINT pk_id_ahorro PRIMARY KEY (id_cuenta),
 	CONSTRAINT fk_id_soc_aho FOREIGN KEY (id_socio) REFERENCES soc_socio (id_socio),
 	CONSTRAINT estado_aho_cuenta_ahorro_check CHECK (estado in ('A','I'))
@@ -115,9 +105,8 @@ CREATE TABLE aho_cuenta_ahorro (
 CREATE TABLE aho_tipo_movimiento (
 	id_tipo number(3) not null,
 	nombre_tipo varchar2(20) not null,
-	debito_credito varchar2(1) DEFAULT 'D',
-	CONSTRAINT pk_id_tipo_mov PRIMARY KEY (id_tipo),
-	CONSTRAINT debito_credito_aho_tipo_movimiento check (debito_credito in ('D', 'C'))
+	debito_credito varchar2(1) not nul DEFAULT 'D',
+	CONSTRAINT pk_id_tipo_mov PRIMARY KEY (id_tipo)
 );
 
 --create table aho_movimientos_cuenta
@@ -129,25 +118,25 @@ CREATE TABLE aho_movimientos_cuenta (
 	id_cuenta number(8) not null,
 	CONSTRAINT pk_id_mov PRIMARY KEY (id_movimiento),
 	CONSTRAINT fk_tipo_mov FOREIGN KEY (id_tipo) REFERENCES aho_tipo_movimiento(id_tipo),
-	CONSTRAINT fk_id_cta_aho FOREIGN KEY (id_cuenta) REFERENCES aho_cuenta_ahorro(id_cuenta)
+	CONSTRAINT fk_ id_cta_aho FOREIGN KEY (id_cuenta)
 );
 
 --create table ald_declaracion_jurada
 CREATE TABLE ald_declaracion_jurada(
 	id_declaracion number(10) not null,
-	fecha_presentacion date not null,
+	fecha_presentacion date, not null,
 	ocupacion varchar2(30) not null,
 	empresa_actual varchar2(30),
 	motivo_presentacion varchar2(100) not null,
 	observaciones varchar2(300),
 	id_socio number(12),
-	CONSTRAINT pk_id_declaracion PRIMARY KEY (id_declaracion),
+	CONSTRAINT pk_id_declaracion PRIMARY KEY (id_movimiento),
 	CONSTRAINT fk_id_soc_decl FOREIGN KEY (id_socio) REFERENCES soc_socio (id_socio)
 );
 
 --create table ald_conceptos
 CREATE TABLE ald_conceptos (
-	id_concepto number(3) not null,
+	id_concepto numer(3) not null,
 	nombre_concepto varchar2(40) not null,
 	ingreso_gasto varchar2(1) not null,
 	CONSTRAINT pk_id_concepto PRIMARY KEY (id_concepto)
@@ -159,66 +148,5 @@ CREATE TABLE ald_detalle_declaracion(
 	nro_item number(5) not null,
 	importe number(15) not null,
 	id_concepto number (3) not null,
-	CONSTRAINT pk_id_det_declar PRIMARY KEY (id_declaracion, nro_item),
-	CONSTRAINT fk_det_decla FOREIGN KEY (id_concepto) REFERENCES ald_conceptos (id_concepto),
-	CONSTRAINT fk_id_decl FOREIGN KEY (id_declaracion) REFERENCES ald_declaracion_jurada (id_declaracion)
-);
-
---create table soc_obligaciones
-CREATE TABLE soc_obligaciones(
-	id_obligacion number(10) not null,
-	anho number(4) not null,
-	total_a_abonar number(8) not null,
-	saldo number(8) not null,
-	tipo_obligacion varchar2(1) DEFAULT 'A',
-	id_socio number(12) not null,
-	CONSTRAINT pk_cod_oblig PRIMARY KEY (id_obligacion),
-	CONSTRAINT fk_id_soc_obl FOREIGN KEY (id_socio) REFERENCES soc_socio (id_socio),
-	CONSTRAINT tipo_obligacion_soc_obligaciones CHECK (tipo_obligacion in ('A', 'S'))
-);
-
---create table soc_detalle_oblicacion
-CREATE TABLE soc_detalle_obligacion(
-	id_obligacion number(10) not null,
-	num_cuota number(2) not null,
-	monto number(8) not null,
-	fecha_pago date,
-	CONSTRAINT pk_det_oblig PRIMARY KEY (id_obligacion, num_cuota),
-	CONSTRAINT fk_id_oblig FOREIGN KEY (id_obligacion) REFERENCES soc_obligaciones (id_obligacion)
-);
-
---create table ald_rodados
-CREATE TABLE ald_rodados(
-	rua varchar2(30) not null,
-	id_socio number(12) not null,
-	tipo_vehiculo varchar2(20) not null,
-	marca varchar2(25) not null,
-	modelo varchar2(25) not null,
-	valor number(12) not null,
-	fecha_adquisicion date not null,
-	CONSTRAINT pk_id_rodados PRIMARY KEY (rua),
-	CONSTRAINT fk_id_soc_rod FOREIGN KEY (id_socio) REFERENCES soc_socio (id_socio)
-);
-
---create table ad_inmuebles
-CREATE TABLE ald_inmuebles(
-	id_inmueble number(8) not null,
-	id_socio number(12) not null,
-	cta_cte_catastral varchar2(20) not null,
-	finca varchar2(15) not null,
-	superficie_m2 number(4) not null,
-	valor_fiscal number(15) not null,
-	valor_avaluo number(15) not null,
-	CONSTRAINT pk_id_inmueble PRIMARY KEY (id_inmueble),
-	CONSTRAINT fk_id_soc_inm FOREIGN KEY (id_socio) REFERENCES soc_socio (id_socio)
-);
-
---create table gen_parametros
-CREATE TABLE gen_parametros(
-	aporte_mensual number(8) not null,
-	solidaridad_mensual number(8) not null,
-	antiguedad_minima number(2),
-	ruc_cooperativa varchar2(15) not null,
-	interes_moratorio_bcp number(2),
-	porc_seg_vida number(3,1)
+	CONSTRAINT pk_id_det_declar
 );
