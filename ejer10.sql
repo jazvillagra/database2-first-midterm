@@ -1,2 +1,16 @@
 CREATE USER jvillagra IDENTIFIED BY jvillagra DEFAULT TABLESPACE BASEDATOS2 TEMPORARY TABLESPACE TEMP; 
 GRANT CONNECT TO jvillagra;
+
+CREATE USER matiasfare IDENTIFIED BY matiasfare;
+
+
+GRANT
+  SELECT,
+  INSERT,
+  UPDATE,
+  DELETE
+ON
+  schema.books
+TO
+  matiasfare;
+
