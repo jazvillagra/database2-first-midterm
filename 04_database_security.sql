@@ -7,6 +7,16 @@ COMMIT;
 -- * SELECT sobre las tablas de los todos los módulos.
 -- * INSERT, UPDATE, DELETE sobre las tablas que pertenecen a los módulos
 -- de Solidaridad (SOL) y Créditos (CRE).
+
+spool /opt/oracle/oradata/grant-select-all.sql
+
+SELECT 'GRANT SELECT ON '|| TABLE_NAME ||' TO jazmin_villagra'
+FROM tabs;
+
+spool off
+
+COMMIT;
+
 spool /opt/oracle/oradata/grant.sql
 
 SELECT 'GRANT INSERT, UPDATE, DELETE ON '|| TABLE_NAME ||' TO jazmin_villagra'
