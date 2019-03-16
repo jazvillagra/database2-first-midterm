@@ -1,3 +1,8 @@
+-- 2) Deberá crear las tablas del esquema (con excepción de las marcadas en gris).
+-- Deberá considerar las claves primarias, constraints de no nulidad y claves
+-- foráneas. En este paso asigne por defecto el tablespace creado, pero no hace
+-- falta que determine el tamaño de las tablas.
+-- 3) Adicionalmente deberá establecer las restricciones indicadas
 --create table soc_socio
 CREATE TABLE soc_socio (
 	id_socio number(12) not null,
@@ -214,3 +219,4 @@ CREATE TABLE gen_parametros(
 	interes_moratorio_bcp number(2),
 	porc_seg_vida number(3,1)
 );
+
