@@ -1,6 +1,10 @@
 -- 10)Cree un usuario para usted (nombre_apellido) y asígnele por defecto el
 -- tablespace creado, así como el rol para conectarse.
-CREATE USER jazmin_villagra IDENTIFIED BY jvillagra DEFAULT TABLESPACE BASEDATOS2; 
+CREATE USER jazmin_villagra
+IDENTIFIED BY jvillagra
+DEFAULT TABLESPACE BASEDATOS2
+TEMPORARY TABLESPACE tmp;
+
 GRANT CONNECT TO jazmin_villagra;
 COMMIT;
 -- 11)Cree un script para grantear al usuario creado los privilegios de:
