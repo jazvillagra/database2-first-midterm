@@ -1,0 +1,4 @@
+insert into soc_socio
+values(1,123456,123456,'Mario','Gomez','07-JUN-70',SYSDATE,'dir1','021652336','mariogomez@mail.com','NO',NULL, 'A',NULL,NULL);
+insert into soc_socio
+values(2,789101,789101,'Juana','Gomez','07-JUN-75',SYSDATE,'dir2','021652335','juanagomez@gmail.com','NO',NULL, 'A',NULL,NULL);

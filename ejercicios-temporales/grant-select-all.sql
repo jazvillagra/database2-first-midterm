@@ -1,0 +1,40 @@
+SQL> /
+
+GRANT CREATE SESSION ON B_AREAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                     
+GRANT CREATE SESSION ON B_ARTICULOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+GRANT CREATE SESSION ON B_CATEGORIAS_SALARIALES TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                     
+GRANT CREATE SESSION ON B_TIPO_CUENTA TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                               
+GRANT CREATE SESSION ON B_CUENTAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                   
+GRANT CREATE SESSION ON B_LOCALIDAD TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+GRANT CREATE SESSION ON B_PERSONAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                  
+GRANT CREATE SESSION ON B_COMPRAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                   
+GRANT CREATE SESSION ON B_DETALLE_COMPRAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                           
+GRANT CREATE SESSION ON B_EMPLEADOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+GRANT CREATE SESSION ON B_VENTAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                    
+GRANT CREATE SESSION ON B_DETALLE_VENTAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                            
+GRANT CREATE SESSION ON B_DIARIO_CABECERA TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                           
+GRANT CREATE SESSION ON B_DIARIO_DETALLE TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                            
+GRANT CREATE SESSION ON B_LIQUIDACION TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                               
+GRANT CREATE SESSION ON B_MAYOR TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                     
+GRANT CREATE SESSION ON B_PLANILLA TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                  
+GRANT CREATE SESSION ON B_PLAN_PAGO TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+GRANT CREATE SESSION ON B_POSICION_ACTUAL TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                           
+GRANT CREATE SESSION ON SOC_SOCIO TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                   
+GRANT CREATE SESSION ON CRE_MODALIDAD_PRESTAMO TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                      
+GRANT CREATE SESSION ON CRE_SOLICITUD_PRESTAMOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                     
+GRANT CREATE SESSION ON CRE_PRESTAMOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                               
+GRANT CREATE SESSION ON CRE_CUOTAS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                  
+GRANT CREATE SESSION ON AHO_CUENTA_AHORRO TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                           
+GRANT CREATE SESSION ON AHO_TIPO_MOVIMIENTO TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                         
+GRANT CREATE SESSION ON AHO_MOVIMIENTOS_CUENTA TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                      
+GRANT CREATE SESSION ON ALD_DECLARACION_JURADA TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                      
+GRANT CREATE SESSION ON ALD_CONCEPTOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                               
+GRANT CREATE SESSION ON ALD_DETALLE_DECLARACION TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                     
+GRANT CREATE SESSION ON SOC_OBLIGACIONES TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                            
+GRANT CREATE SESSION ON SOC_DETALLE_OBLIGACION TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                      
+GRANT CREATE SESSION ON ALD_RODADOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+GRANT CREATE SESSION ON ALD_INMUEBLES TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                               
+GRANT CREATE SESSION ON GEN_PARAMETROS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                              
+GRANT CREATE SESSION ON V_SOCIOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                    
+GRANT CREATE SESSION ON V_PRESTAMOS TO jazmin_villagra, matias_fare, yesshua_lopez;                                                                                                 
+SQL> spool off
